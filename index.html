@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Missed Call ROI Calculator</title>
+</head>
+<body class="bg-gray-100 p-8">
+    <div class="max-w-lg mx-auto p-8 bg-white shadow-xl rounded-2xl">
+        <h1 class="text-2xl font-semibold mb-4">Missed Call ROI Calculator</h1>
+        <label class="block mb-2">Average Client Value ($):</label>
+        <input id="avgClientValue" type="number" class="w-full border p-2 mb-4 rounded-lg"/>
+
+        <label class="block mb-2"># of Missed Calls per Month:</label>
+        <input id="missedCalls" type="number" class="w-full border p-2 mb-4 rounded-lg"/>
+
+        <label class="block mb-2">Average Close Rate (%):</label>
+        <input id="closeRate" type="number" class="w-full border p-2 mb-4 rounded-lg"/>
+
+        <button onclick="calculateROI()" class="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600">
+            Calculate ROI
+        </button>
+
+        <div id="result" class="mt-4 p-4 bg-green-100 text-green-800 rounded-lg hidden"></div>
+    </div>
+
+    <script>
+        function calculateROI() {
+            const value = parseFloat(document.getElementById('avgClientValue').value);
+            const calls = parseInt(document.getElementById('missedCalls').value);
+            const rate = parseFloat(document.getElementById('closeRate').value) / 100;
+
+            if (!isNaN(value) && !isNaN(calls) && !isNaN(rate)) {
+                const roi = (value * calls * rate).toFixed(2);
+                const resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = 'Estimated ROI: $' + roi;
+                resultDiv.classList.remove('hidden');
+            }
+        }
+    </script>
+</body>
+</html>
